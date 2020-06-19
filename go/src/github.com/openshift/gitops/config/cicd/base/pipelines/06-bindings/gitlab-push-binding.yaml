@@ -1,0 +1,15 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerBinding
+metadata:
+  creationTimestamp: null
+  name: gitlab-push-binding
+  namespace: cicd
+spec:
+  params:
+  - name: gitref
+    value: $(body.ref)
+  - name: gitsha
+    value: $(body.after)
+  - name: gitrepositoryurl
+    value: $(body.project.git_http_url)
+status: {}

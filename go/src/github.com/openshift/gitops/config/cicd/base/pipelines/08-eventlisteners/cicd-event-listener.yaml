@@ -1,0 +1,57 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  creationTimestamp: null
+  name: cicd-event-listener
+  namespace: cicd
+spec:
+  serviceAccountName: pipeline
+  triggers:
+  - bindings:
+    - name: gitlab-pr-binding
+    interceptors:
+    - cel:
+        filter: header.match('X-Gitlab-Event','Merge Request Hook') && body.object_attributes.state
+          == 'opened' && body.project.path_with_namespace == 'gaganhegde/gitops-final'  &&
+          body.project.default_branch == body.object_attributes.target_branch
+    - gitlab:
+        secretRef:
+          namespace: cicd
+          secretKey: webhook-secret-key
+          secretName: gitops-webhook-secret
+    name: ci-dryrun-from-pr
+    template:
+      name: ci-dryrun-from-pr-template
+  - bindings:
+    - name: gitlab-push-binding
+    interceptors:
+    - cel:
+        filter: header.match('X-Gitlab-Event','Push Hook') && body.project.path_with_namespace
+          == 'gaganhegde/gitops-final' && body.ref.endsWith(body.project.default_branch)
+    - gitlab:
+        secretRef:
+          namespace: cicd
+          secretKey: webhook-secret-key
+          secretName: gitops-webhook-secret
+    name: cd-deploy-from-push
+    template:
+      name: cd-deploy-from-push-template
+  - bindings:
+    - name: dev-taxi-svc-binding
+    - name: gitlab-pr-binding
+    interceptors:
+    - cel:
+        filter: header.match('X-Gitlab-Event','Merge Request Hook') && body.object_attributes.state
+          == 'opened' && body.project.path_with_namespace == 'gaganhegde/taxi'  &&
+          body.project.default_branch == body.object_attributes.target_branch
+    - gitlab:
+        secretRef:
+          namespace: cicd
+          secretKey: webhook-secret-key
+          secretName: webhook-secret-dev-taxi-svc
+    name: app-ci-build-from-pr-taxi-svc
+    template:
+      name: app-ci-template
+status:
+  configuration:
+    generatedName: ""
