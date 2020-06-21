@@ -8,13 +8,13 @@ spec:
   serviceAccountName: pipeline
   triggers:
   - bindings:
-    - name: gitlab-pr-binding
+    - name: github-pr-binding
     interceptors:
     - cel:
-        filter: header.match('X-Gitlab-Event','Merge Request Hook') && body.object_attributes.state
-          == 'opened' && body.project.path_with_namespace == 'gaganhegde/gitops-final'  &&
-          body.project.default_branch == body.object_attributes.target_branch
-    - gitlab:
+        filter: (header.match('X-GitHub-Event', 'pull_request') && body.action ==
+          'opened' || body.action == 'synchronize') && body.pull_request.head.repo.full_name
+          == 'gaganhegde/gitops-final'
+    - github:
         secretRef:
           namespace: cicd
           secretKey: webhook-secret-key
@@ -23,12 +23,12 @@ spec:
     template:
       name: ci-dryrun-from-pr-template
   - bindings:
-    - name: gitlab-push-binding
+    - name: github-push-binding
     interceptors:
     - cel:
-        filter: header.match('X-Gitlab-Event','Push Hook') && body.project.path_with_namespace
-          == 'gaganhegde/gitops-final' && body.ref.endsWith(body.project.default_branch)
-    - gitlab:
+        filter: (header.match('X-GitHub-Event', 'push') && body.repository.full_name
+          == 'gaganhegde/gitops-final') && body.ref.startsWith('refs/heads/master')
+    - github:
         secretRef:
           namespace: cicd
           secretKey: webhook-secret-key
@@ -38,13 +38,13 @@ spec:
       name: cd-deploy-from-push-template
   - bindings:
     - name: dev-taxi-svc-binding
-    - name: gitlab-pr-binding
+    - name: github-pr-binding
     interceptors:
     - cel:
-        filter: header.match('X-Gitlab-Event','Merge Request Hook') && body.object_attributes.state
-          == 'opened' && body.project.path_with_namespace == 'gaganhegde/taxi'  &&
-          body.project.default_branch == body.object_attributes.target_branch
-    - gitlab:
+        filter: (header.match('X-GitHub-Event', 'pull_request') && body.action ==
+          'opened' || body.action == 'synchronize') && body.pull_request.head.repo.full_name
+          == 'gaganhegde/taxi'
+    - github:
         secretRef:
           namespace: cicd
           secretKey: webhook-secret-key

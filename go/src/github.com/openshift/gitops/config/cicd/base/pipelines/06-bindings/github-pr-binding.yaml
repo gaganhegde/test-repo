@@ -2,16 +2,16 @@ apiVersion: triggers.tekton.dev/v1alpha1
 kind: TriggerBinding
 metadata:
   creationTimestamp: null
-  name: gitlab-pr-binding
+  name: github-pr-binding
   namespace: cicd
 spec:
   params:
   - name: gitref
-    value: $(body.object_attributes.source_branch)
+    value: $(body.pull_request.head.ref)
   - name: gitsha
-    value: $(body.object_attributes.last_commit.id)
+    value: $(body.pull_request.head.sha)
   - name: gitrepositoryurl
-    value: $(body.project.git_http_url)
+    value: $(body.repository.clone_url)
   - name: fullname
-    value: $(body.project.path_with_namespace)
+    value: $(body.repository.full_name)
 status: {}

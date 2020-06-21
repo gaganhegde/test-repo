@@ -12,7 +12,7 @@ environments:
   pipelines:
     integration:
       bindings:
-      - gitlab-pr-binding
+      - github-pr-binding
       template: app-ci-template
   services:
   - name: taxi-svc
@@ -20,11 +20,11 @@ environments:
       integration:
         bindings:
         - dev-taxi-svc-binding
-        - gitlab-pr-binding
-    source_url: https://gitlab.com/gaganhegde/taxi.git
+        - github-pr-binding
+    source_url: https://github.com/gaganhegde/taxi.git
     webhook:
       secret:
         name: webhook-secret-dev-taxi-svc
         namespace: cicd
 - name: stage
-gitops_url: https://gitlab.com/gaganhegde/gitops-final.git
+gitops_url: https://github.com/gaganhegde/gitops-final.git
