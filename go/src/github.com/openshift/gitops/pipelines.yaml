@@ -27,4 +27,4 @@ environments:
         name: webhook-secret-dev-taxi-svc
         namespace: cicd
 - name: stage
-gitops_url: https://github.com/gaganhegde/gitops-final.git
+gitops_url: https://github.com/gaganhegde/gitops.git

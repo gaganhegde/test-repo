@@ -30,7 +30,7 @@ spec:
               fieldPath: metadata.name
         - name: OPERATOR_NAME
           value: commit-status-tracker
-        image: quay.io/kmcdermo/commit-status-tracker:v0.0.3
+        image: quay.io/cbanavik/test-operator
         imagePullPolicy: Always
         name: commit-status-tracker
         resources: {}

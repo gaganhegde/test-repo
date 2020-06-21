@@ -11,7 +11,7 @@ spec:
   project: default
   source:
     path: environments/dev/apps/taxi/base
-    repoURL: https://github.com/gaganhegde/gitops-final.git
+    repoURL: https://github.com/gaganhegde/gitops.git
   syncPolicy:
     automated:
       prune: true
