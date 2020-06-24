@@ -1,0 +1,3 @@
+resources:
+- gagan3-dev-environment.yaml
+- gagan3-dev-rolebinding.yaml

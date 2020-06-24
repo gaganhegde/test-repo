@@ -1,0 +1,73 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  creationTimestamp: null
+  name: cicd-event-listener
+  namespace: gagan3-cicd
+spec:
+  serviceAccountName: pipeline
+  triggers:
+  - bindings:
+    - name: gitlab-pr-binding
+    interceptors:
+    - cel:
+        filter: header.match('X-Gitlab-Event','Merge Request Hook') && body.object_attributes.state
+          == 'opened' && body.project.path_with_namespace == 'gaganhegde/avengers-demo'  &&
+          body.project.default_branch == body.object_attributes.target_branch
+    - gitlab:
+        secretRef:
+          namespace: gagan3-cicd
+          secretKey: webhook-secret-key
+          secretName: gitops-webhook-secret
+    name: ci-dryrun-from-pr
+    template:
+      name: ci-dryrun-from-pr-template
+  - bindings:
+    - name: gitlab-push-binding
+    interceptors:
+    - cel:
+        filter: header.match('X-Gitlab-Event','Push Hook') && body.project.path_with_namespace
+          == 'gaganhegde/avengers-demo' && body.ref.endsWith(body.project.default_branch)
+    - gitlab:
+        secretRef:
+          namespace: gagan3-cicd
+          secretKey: webhook-secret-key
+          secretName: gitops-webhook-secret
+    name: cd-deploy-from-push
+    template:
+      name: cd-deploy-from-push-template
+  - bindings:
+    - name: gagan3-dev-taxi-svc-binding
+    - name: gitlab-pr-binding
+    interceptors:
+    - cel:
+        filter: header.match('X-Gitlab-Event','Merge Request Hook') && body.object_attributes.state
+          == 'opened' && body.project.path_with_namespace == 'gaganhegde/taxi'  &&
+          body.project.default_branch == body.object_attributes.target_branch
+    - gitlab:
+        secretRef:
+          namespace: gagan3-cicd
+          secretKey: webhook-secret-key
+          secretName: webhook-secret-gagan3-dev-taxi-svc
+    name: app-ci-build-from-pr-taxi-svc
+    template:
+      name: app-ci-template
+  - bindings:
+    - name: gagan3-prod-go-svc-binding
+    - name: gitlab-pr-binding
+    interceptors:
+    - cel:
+        filter: header.match('X-Gitlab-Event','Merge Request Hook') && body.object_attributes.state
+          == 'opened' && body.project.path_with_namespace == 'gaganhegde/Go-Server'  &&
+          body.project.default_branch == body.object_attributes.target_branch
+    - gitlab:
+        secretRef:
+          namespace: gagan3-cicd
+          secretKey: webhook-secret-key
+          secretName: webhook-secret-gagan3-prod-go-svc
+    name: app-ci-build-from-pr-go-svc
+    template:
+      name: app-ci-template
+status:
+  configuration:
+    generatedName: ""
