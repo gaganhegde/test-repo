@@ -1,0 +1,3 @@
+resources:
+- endgame-dev-environment.yaml
+- endgame-dev-rolebinding.yaml

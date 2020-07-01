@@ -1,0 +1,27 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  creationTimestamp: null
+  name: endgame-dev-app-taxi
+  namespace: argocd
+spec:
+  destination:
+    namespace: endgame-dev
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    path: environments/endgame-dev/apps/app-taxi/base
+    repoURL: https://github.com/gaganhegde/test-repo.git
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+status:
+  health: {}
+  summary: {}
+  sync:
+    comparedTo:
+      destination: {}
+      source:
+        repoURL: ""
+    status: ""
