@@ -2,51 +2,29 @@ config:
   argocd:
     namespace: argocd
   pipelines:
-    name: gagan3-cicd
+    name: ghegde1-cicd
 environments:
 - apps:
+  - name: app-taxi
+    services:
+    - taxi
+  name: ghegde1-dev
+  pipelines:
+    integration:
+      bindings:
+      - github-pr-binding
+      template: app-ci-template
+  services:
   - name: taxi
-    services:
-    - taxi-svc
-  name: gagan3-dev
-  pipelines:
-    integration:
-      bindings:
-      - gitlab-pr-binding
-      template: app-ci-template
-  services:
-  - name: taxi-svc
     pipelines:
       integration:
         bindings:
-        - gagan3-dev-taxi-svc-binding
-        - gitlab-pr-binding
-    source_url: https://gitlab.com/gaganhegde/taxi.git
+        - ghegde1-dev-taxi-binding
+        - github-pr-binding
+    source_url: https://github.com/gaganhegde/taxi.git
     webhook:
       secret:
-        name: webhook-secret-gagan3-dev-taxi-svc
-        namespace: gagan3-cicd
-- apps:
-  - name: app-1
-    services:
-    - go-svc
-  name: gagan3-prod
-  pipelines:
-    integration:
-      bindings:
-      - gitlab-pr-binding
-      template: app-ci-template
-  services:
-  - name: go-svc
-    pipelines:
-      integration:
-        bindings:
-        - gagan3-prod-go-svc-binding
-        - gitlab-pr-binding
-    source_url: https://gitlab.com/gaganhegde/Go-Server.git
-    webhook:
-      secret:
-        name: webhook-secret-gagan3-prod-go-svc
-        namespace: gagan3-cicd
-- name: gagan3-stage
-gitops_url: https://gitlab.com/gaganhegde/avengers-demo.git
+        name: webhook-secret-ghegde1-dev-taxi
+        namespace: ghegde1-cicd
+- name: ghegde1-stage
+gitops_url: https://github.com/gaganhegde/test-repo.git
