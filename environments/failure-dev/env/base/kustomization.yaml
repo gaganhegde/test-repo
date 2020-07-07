@@ -1,0 +1,3 @@
+resources:
+- failure-dev-environment.yaml
+- failure-dev-rolebinding.yaml

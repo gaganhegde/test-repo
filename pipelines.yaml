@@ -1,0 +1,30 @@
+config:
+  argocd:
+    namespace: endtrigger-argocd
+  pipelines:
+    name: failure-cicd
+environments:
+- apps:
+  - name: app-taxi
+    services:
+    - taxi
+  name: failure-dev
+  pipelines:
+    integration:
+      bindings:
+      - github-pr-binding
+      template: app-ci-template
+  services:
+  - name: taxi
+    pipelines:
+      integration:
+        bindings:
+        - failure-dev-taxi-binding
+        - github-pr-binding
+    source_url: https://github.com/gaganhegde/taxi.git
+    webhook:
+      secret:
+        name: webhook-secret-failure-dev-taxi
+        namespace: failure-cicd
+- name: failure-stage
+gitops_url: https://github.com/gaganhegde/test-repo.git
