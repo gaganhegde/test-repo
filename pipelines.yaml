@@ -28,3 +28,4 @@ environments:
         namespace: sample-cicd
 - name: sample-stage
 gitops_url: https://github.com/gaganhegde/test-repo.git
+#This is a small change 
