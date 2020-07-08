@@ -1,0 +1,3 @@
+resources:
+- endtrigger-dev-environment.yaml
+- endtrigger-dev-rolebinding.yaml

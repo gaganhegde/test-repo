@@ -1,0 +1,16 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: regcred
+  namespace: endtrigger-cicd
+spec:
+  encryptedData:
+    .dockerconfigjson: AgAnncJg8WmPtQkqIYmMRPUxhHo1Bm8707v3chUEl84O60qw6riQ009tkotlsVmHfxHi8nJfIrV4cyPXOkZu8By6RUIWE+1kDUC+jxrvt0LClXCmTcEJ0cTW7KmKlt6N9p9vXyooeza6XokYSVxhVKkECsIW0K+Ih0lVK5xSq/Po2IHgGdpRNwJ6ZTHZlUQxyUpvjESEbBhGbkFHsYgn0mr6ub9ecGqFCoGL5i54nHxA6orTQFxMFW8a4Dcow5qL/tXhKRROcm3RRTY7FZ3RHdl7htuNJO3tZL2FJKz9RsG9CKw/1vxeB0fFXTSwpIoKOdnOVuRoXOmS3vL3xEZ5R4TU4eWFyDPTx8WeSZavK7bRrQr+s+Qw6L375+scK14ZBzJUxrxGlVQkfTiPfu7/19yZq0Skg72b5gKO2tQHPoXXsUmtc/QuCR1zyAMa2jvGp00Dt6tg7+yI8j9nOqgdzI3Na60kmvINIOHpNNFNpgZ7+3DNvgkkmaLY8Ey8x6ruirx/b+YPxnn8FxQfd1f3vql99NVBvYS2mWauUgN6WWPJufQxVLTGt6W2WxbI/1sXEKPjC8ugfQ0+8mLMoW0er7HujVxiGEqk3TEhw8kchcyuZa+RfjY5kp0cnTe3bEZnsd7USY/nDd7NoEDBZ965A7Aooo0vncl5mrpGB8ZpGaTN62jjG8zQJ6H77/ohALhJ2wK6oZiEos3ykvr9TQp5MjM0FL9+c1eOnVjrYHHhyTXaeKFiSxKwOPaXeGwxTdaBVmicsZ1a+LnABkRc7OS87wK/Rh+jEE+WPoo8w5LIIWzYL+UVy1t4uytMfPp2tDMt36SbYkiB7mAGmUOijPRN4RsBiz0SilW5Tf2AktwNwDwhd+3stbrAedu7Nd277+58Gpi/haWIIVVOHtth9EdlQg6i9KnVEzTPzRTSgeBDxNs8xaGg/aOsIjU=
+  template:
+    metadata:
+      creationTimestamp: null
+      name: regcred
+      namespace: endtrigger-cicd
+    type: kubernetes.io/dockerconfigjson
+status: {}
