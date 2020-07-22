@@ -1,0 +1,28 @@
+config:
+  argocd:
+    namespace: argocd
+  pipelines:
+    name: sample-2-cicd
+environments:
+- apps:
+  - name: app-taxi
+    services:
+    - name: taxi
+      pipelines:
+        integration:
+          bindings:
+          - sample-2-dev-app-taxi-taxi-binding
+          - github-push-binding
+      source_url: https://github.com/gaganhegde/taxi.git
+      webhook:
+        secret:
+          name: webhook-secret-sample-2-dev-taxi
+          namespace: sample-2-cicd
+  name: sample-2-dev
+  pipelines:
+    integration:
+      bindings:
+      - github-push-binding
+      template: app-ci-template
+- name: sample-2-stage
+gitops_url: https://github.com/gaganhegde/test-repo.git

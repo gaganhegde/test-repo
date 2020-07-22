@@ -1,0 +1,3 @@
+resources:
+- sample-2-dev-environment.yaml
+- sample-2-dev-rolebinding.yaml

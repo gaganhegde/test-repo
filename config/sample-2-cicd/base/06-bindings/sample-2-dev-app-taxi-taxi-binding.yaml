@@ -1,0 +1,13 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerBinding
+metadata:
+  creationTimestamp: null
+  name: sample-2-dev-app-taxi-taxi-binding
+  namespace: sample-2-cicd
+spec:
+  params:
+  - name: imageRepo
+    value: quay.io/ghegde/image-repo
+  - name: tlsVerify
+    value: "true"
+status: {}
