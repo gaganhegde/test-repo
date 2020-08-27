@@ -1,0 +1,16 @@
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: commit-status-tracker-git-secret
+  namespace: ghegde-cicd
+spec:
+  encryptedData:
+    token: AgCABzcujW583iVFK8SE0oKn8KzwqhZx3otD6dUpV9cBeGAJ07jmf93bShE44zIDI/LwKTDcKI0ppXCdwcRVhpN7oPrMm7DZJQ1a9MD4v1K7clQRk8QZDUeEAoORRjOZdOFM286je+z3A8Wmljzgf5MIzkOnBwjBoktIOBw6qRQ+mqyIiGTCnxyHXK9KVEsDHxgDkzLxOFD2EF0Plkl5BhYU1iNSXjUW7Aiib9PDuGgqdKHCriO0o1TpGdqSi7oz5AEu5UOmGf9980tefkwnUxMc3Mw+wNpRYA4eeZ43zEsh6wbLKXZ5x910uKb+H7cMzW7ksiuowzUYRQflGhLYrp9JkXGgLLuNfn9SXBEQXYY4yHMm7wL4ojAUs/XJQgDyJ7iBNmYoxOn83IryOpzzvFLwUvuCoYzVf18EZjEaIyGfgw95ceF449nLY9lIu54FqugEejahh9eF7ETjKMQ9X0/yED968oPyV3chsjYFHLvlnpXy8fHjlgQWx4Q17iAdAeit3X2MQqv/OaWdCF0WG2DgoiDIc+Q+SpnHcGfX1pwZvZm2FLDFMj9U45Ut4JpvZCFbXfDQmmme7/hl+IuGPlFs13xVApHPZXsQKVkRZ+LWSWUeDikIST9Zqhvss0FRaXPMY3mlplMg+0QeBEAKIZcA/p1E6PulpKK73v8o/y3mqxrHphcIbpHeNsLeSn+RsTBxyQ7pZ1RP0ocDyh48b28pYvYthTPYW33Z7Q9kNEy9cQ5hAV5HK9GE
+  template:
+    metadata:
+      creationTimestamp: null
+      name: commit-status-tracker-git-secret
+      namespace: ghegde-cicd
+    type: Opaque
+status: {}
