@@ -1,0 +1,3 @@
+resources:
+- ghegde-dev-environment.yaml
+- ghegde-dev-rolebinding.yaml
