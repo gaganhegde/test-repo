@@ -6,7 +6,7 @@ metadata:
   namespace: argocd
 spec:
   destination:
-    namespace: ghegde-cicd
+    namespace: cicd
     server: https://kubernetes.default.svc
   ignoreDifferences:
   - group: argoproj.io
@@ -35,7 +35,7 @@ spec:
     kind: SealedSecret
   project: default
   source:
-    path: config/ghegde-cicd/overlays
+    path: config/cicd/overlays
     repoURL: https://github.com/gaganhegde/test-repo.git
   syncPolicy:
     automated:

@@ -2,7 +2,7 @@ config:
   argocd:
     namespace: argocd
   pipelines:
-    name: ghegde-cicd
+    name: cicd
 environments:
 - apps:
   - name: app-taxi
@@ -11,19 +11,19 @@ environments:
       pipelines:
         integration:
           bindings:
-          - ghegde-dev-app-taxi-taxi-binding
+          - dev-app-taxi-taxi-binding
           - github-push-binding
       source_url: https://github.com/gaganhegde/taxi.git
       webhook:
         secret:
-          name: webhook-secret-ghegde-dev-taxi
-          namespace: ghegde-cicd
-  name: ghegde-dev
+          name: webhook-secret-dev-taxi
+          namespace: cicd
+  name: dev
   pipelines:
     integration:
       bindings:
       - github-push-binding
       template: app-ci-template
-- name: ghegde-stage
+- name: stage
 gitops_url: https://github.com/gaganhegde/test-repo.git
 version: 1

@@ -1,9 +1,0 @@
-apiVersion: v1
-kind: Namespace
-metadata:
-  annotations:
-    app.openshift.io/vcs-uri: https://github.com/gaganhegde/test-repo.git
-  creationTimestamp: null
-  name: ghegde-dev
-spec: {}
-status: {}
