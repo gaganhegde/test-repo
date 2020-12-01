@@ -14,3 +14,4 @@ spec:
       namespace: cicd
     type: Opaque
     test: 1
+    test: 2
